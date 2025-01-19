@@ -217,7 +217,7 @@ class FunCapHook(DBG_Hooks):
         Add breakpoints on all function starts
         """
         for f in list(Functions()):
-            add_bpt(f,0,BPT_SOFT)
+            add_bpt(f, 0, BPT_SOFT)
 
     def addFuncRet(self):
         """
@@ -229,7 +229,7 @@ class FunCapHook(DBG_Hooks):
                 # If it's an instruction
                 if is_code(get_full_flags(head)):
                     if self.is_ret(head):
-                        add_bpt(head,0,BPT_SOFT)
+                        add_bpt(head, 0, BPT_SOFT)
 
     def addCallee(self):
         """
@@ -333,7 +333,7 @@ class FunCapHook(DBG_Hooks):
         """
 
         self.stop_points.append(ea)
-        add_bpt(ea,0,BPT_SOFT)
+        add_bpt(ea, 0, BPT_SOFT)
 
     ###
     # END of public interface
@@ -351,7 +351,7 @@ class FunCapHook(DBG_Hooks):
             # If it's an instruction
             if is_code(get_full_flags(head)):
                 if self.is_call(head):
-                    add_bpt(head,0,BPT_SOFT)
+                    add_bpt(head, 0, BPT_SOFT)
 
     def add_call_and_jump_bp(self, start_ea, end_ea):
         """
@@ -366,7 +366,7 @@ class FunCapHook(DBG_Hooks):
             # If it's an instruction
             if is_code(get_full_flags(head)):
                 if self.is_call(head) or self.is_jump(head):
-                    add_bpt(head,0,BPT_SOFT)
+                    add_bpt(head, 0, BPT_SOFT)
 
     def get_num_args_stack(self, addr):
         """
@@ -1392,7 +1392,7 @@ class FunCapHook(DBG_Hooks):
         else:
             user_bp = False
             add_bpt(
-                ret_addr
+                ret_addr, 0, BPT_SOFT
             )  # catch return from the function if not user-added breakpoint
 
         # fetch the operand for "ret" - will be needed when we will capture the return from the function
@@ -2124,7 +2124,7 @@ class Auto:
         d.off()
         d.delAll()
         start = get_entry_ordinal(0)
-        add_bpt(start,0,BPT_SOFT)
+        add_bpt(start, 0, BPT_SOFT)
         segname = get_segm_name(start)
         start_process("", "", "")
         wait_for_next_event(WFNE_SUSP, -1)
@@ -2143,7 +2143,7 @@ class Auto:
         d.off()
         d.delAll()
         start = get_entry_ordinal(0)
-        add_bpt(start,0,BPT_SOFT)
+        add_bpt(start, 0, BPT_SOFT)
         start_process("", "", "")
         wait_for_next_event(WFNE_SUSP, -1)
         print("Auto: program entry point reached")
@@ -2161,7 +2161,7 @@ class Auto:
         d.off()
         d.delAll()
         start = get_entry_ordinal(0)
-        add_bpt(start,0,BPT_SOFT)
+        add_bpt(start, 0, BPT_SOFT)
         start_process("", "", "")
         wait_for_next_event(WFNE_SUSP, -1)
         print("Auto: program entry point reached")
