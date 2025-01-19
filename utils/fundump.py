@@ -1,8 +1,8 @@
-'''
+"""
 Created on 21 janv. 2014
 
 @author: deresz
-'''
+"""
 
 import hashlib
 import pickle
@@ -26,12 +26,12 @@ for f in list(Functions()):
         bytes_read = BYTES_COMPARE
     start_bytes = idc.get_bytes(function.start_ea, bytes_read)
     m = hashlib.md5()
-    m.update("%x".encode('utf-8') % flen)
+    m.update("%x".encode("utf-8") % flen)
     m.update(start_bytes)
     digest = m.digest()
     renamed_functions[digest] = name
     print("Function name %s saved" % name)
 
-dumpfile = os.path.expanduser('~') + "/fun.dump"
+dumpfile = os.path.expanduser("~") + "/fun.dump"
 pickle.dump(renamed_functions, open(dumpfile, "wb"))
 print("Dumped function names to %s." % dumpfile)
